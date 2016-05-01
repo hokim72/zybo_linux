@@ -1,0 +1,34 @@
+$ make image
+$ sudo dd if=img/ubuntu_armhf_16.04_zybo.img of=/dev/sdc bs=4M
+
+# echo -e "d\n2\nw" | fdisk /dev/mmcblk0
+# parted -s /dev/mmcblk0 mkpart primary ext4 128MB 100%
+# reboot
+# resize2fs /dev/mmcblk0p2
+
+$ sudo vi /etc/udev/rules.d/10-network.rules
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="74:da:38:42:21:93", NAME="wlan0"
+$ sudo vi /etc/network/interfaces.d/wlan0
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+        pre-up wpa_supplicant -B -D wext -i wlan0 -c /etc/wpa_supplicant.conf
+        post-down killall -q wpa_supplicant
+        udhcpc_opts -t7 -T3
+
+$ sudo vi /etc/wpa_supplicant.conf
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+        ssid="iptime_mini"
+        key_mgmt=NONE
+        wep_key0="91414"
+}
+
+# wpa_passphrase NOTICE2.4 noticekorea21
+network={
+        ssid="NOTICE2.4"
+        #psk="noticekorea21"
+        psk=4b4221e12cf9cd6baeee9befb0d207cedc0bba343956bcfe7c0e63d1d1204aa9
+}
+$ sudo reboot

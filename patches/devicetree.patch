@@ -1,0 +1,50 @@
+--- devicetree.dts.orig	2016-04-30 22:12:25.533102667 +0900
++++ devicetree.dts	2016-05-01 12:19:37.230389033 +0900
+@@ -22,7 +22,7 @@
+ 	};
+ 	memory {
+ 		device_type = "memory";
+-		reg = <0x0 0x20000000>;
++		reg = <0x0 0x1e000000>;
+ 	};
+ };
+ &gem0 {
+@@ -66,3 +66,38 @@
+ 	fclk-enable = <0xf>;
+ 	ps-clk-frequency = <50000000>;
+ };
++
++&gem0 {
++	phy-handle = <&phy0>;
++	ps7_ethernet_0_mdio: mdio {
++		#address-cells = <0x1>;
++		#size-cells = <0x0>;
++		phy0: phy@1 {
++			compatible = "realtek,RTL8211E";
++			device_type = "ethernet-phy";
++			reg = <1>;
++		};
++ 	};
++};
++&i2c0 {
++	eeprom@50 {
++		/* Microchip 24AA02E48 */
++		compatible = "microchip,24c02";
++		reg = <0x50>;
++	};
++};
++&clkc {
++	fclk-enable = <0xf>;
++};
++/ {
++	usb_phy0: phy0 {
++		compatible = "ulpi-phy";
++		#phy-cells = <0>;
++		reg = <0xe0002000 0x1000>;
++		view-port = <0x0170>;
++		drv-vbus;
++	};
++};
++&usb0 {
++	usb-phy = <&usb_phy0>;
++};

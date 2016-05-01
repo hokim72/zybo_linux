@@ -1,0 +1,87 @@
+$ make ARCH=arm menuconfig
+
+Device Drivers -> Network device support -> PHY Device support and infrastructure
+< > Drivers for Marvel PHYs     ===> CONFIG_MARVEL_PHY=n
+< > Drivers for the Vitesse PHYs ===> CONFIG_VITESSE_PHY=n
+<*> Drivers for Realtek PHYs ===> CONFIG_REALTEK_PHY=y
+
+linux-xlnx-xilinx-v2015.4.01/net/Makefile:obj-$(CONFIG_WIRELESS)		+= wireless/ ===> CONFIG_WIRELESS=y
+
+Device Drivers -> Network device support -> Wireless LAN
+<*> Ralink driver support  ===> CONFIG_RT2X00=y
+	<*> Ralink rt27xx/rt28xx/rt30xx (USB) support ===> CONFIG_RT2800USB=y
+	<*> rt2800usb - Include support for rt3573 devices ===> CONFIG_RT2800USB_RT3573=y
+	<*> rt2800usb - Include support for rt53xx devices ===> CONFIG_RT2800USB_RT53XX=y
+	<*> rt2800usb - Include support for rt55xx devices ===> CONFIG_RT2800USB_RT55XX=y
+	<*> rt2800usb - Include support for unknown (USB) ===> CONFIG_RT2800USB_UNKNOWN=y
+
+< > Realtek rtlwifi family of devices ==> CONFIG_RTL_CARDS=n
+
+<*> Realtek 8192C USB WiFi ===> CONFIG_RTL8192CU=y
+
+
+Networking support -> Wireless
+<*> cfg80211 - wireless configuration API ===> CONFIG_CFG80211=y
+<*> Generic IEEE 802.11 Networking Stack(mac80211) ===> CONFIG_MAC80211=y
+
+Networking support -> Networking options
+<*> Network packet filtering framework (Netfilter) ===> CONFIG_NETFILTER=y
+	<*> Advanced netfilter configuration ===> CONFIG_NETFILTER_ADVANCED=y
+	Core Netfilter Configuration
+		<*> Netfilter connection tracking support ===> CONFIG_NF_CONNTRACK=y
+		<*> Supply CT list in procfs (OBSOLETE) ===> CONFIG_NF_CONNTRACK_PROCFS=y
+
+		<*> Netfilter Xtables support (required fot ip_tables) ==> CONFIG_NETFILTER_XTABLES=y
+
+	IP: Netfilter Configuration
+		<*> IPv4 connection tracking support (required for NAT) ===> CONFIG_NF_CONNTRACK_IPV4=y
+		<*> proc/sysctl compatibility with old connection tracking ===> CONFIG_NF_CONNTRACK_PROC_COMPAT=y
+		<*> IPv4 NAT ===> CONFIG_NF_NAT_IPV4=y
+		<*> IPv4 masquerade support ===> CONFIG_NF_NAT_MASQUERADE_IPV4=y
+		<*> IP tables support (required for filtering/masq/NAT) ===> CONFIG_IP_NF_IPTABLES=y
+		<*> Packet filtering ===> CONFIG_IP_NF_FILTER=y
+		<*> iptables NAT support ===> CONFIG_IP_NF_NAT=y
+		<*> MASQUERADE target support ===> CONFIG_IP_NF_TARGET_MASQUERADE=y
+		<*> Packet mangling ===> CONFIG_IP_NF_MANGLE=y
+
+General setup 
+<*> Namespaces support ===> CONFIG_NAMESPACES=y
+	<*> UTS namespace  ===> CONFIG_UTS_NS=y
+	<*> IPC namespace ===> CONFIG_IPC_NS=y
+	<*> PID Namespace ===> CONFIG_PID_NS=y
+	<*> Network namespace ===> CONFIG_NET_NS=y
+
+Device Drivers -> USB support
+<*> USB Modem (CDC ACM) support ===> CONFIG_USB_ACM=y
+
+Device Drivers -> Device Tree and Open Firmware support
+<*> Device Tree overlays (NEW) ===> CONFIG_OF_OVERLAY=y
+
+
+Device Drivers -> SPI support
+<*> User mode SPI device driver support ===> CONFIG_SPI_SPIDEV=y
+
+
+CONFIG_NF_NAT=y
+CONFIG_NF_NAT_NEEDED=y
+CONFIG_NETFILTER_XT_NAT=y
+CONFIG_NETFILTER_XT_MATCH_CONNTRACK=y
+CONFIG_NETFILTER_XT_MATCH_STATE=y
+CONFIG_NF_DEFRAG_IPV4=y
+
+
+
+
+
+		
+
+
+		
+
+
+
+
+
+
+
+

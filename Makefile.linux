@@ -1,0 +1,49 @@
+TMP = tmp
+# check if download cache directory is available
+ifdef BR2_DL_DIR
+DL=$(BR2_DL_DIR)
+else
+DL=$(TMP)
+endif
+TARGET=target
+
+LINUX_TAG     = xilinx-v2015.4.01
+LINUX_DIR     = $(TMP)/linux-xlnx-$(LINUX_TAG)
+LINUX_TAR     = $(DL)/linux-xlnx-$(LINUX_TAG).tar.gz
+LINUX_URL     ?= https://github.com/Xilinx/linux-xlnx/archive/$(LINUX_TAG).tar.gz
+LINUX_GIT     ?= https://github.com/Xilinx/linux-xlnx.git
+
+ifeq ($(CROSS_COMPILE),arm-xilinx-linux-gnueabi-)
+LINUX_CFLAGS = "-O2 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=soft"
+else
+LINUX_CFLAGS = "-O2 -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard"
+endif
+
+LINUX           = $(TMP)/uImage
+
+$(TARGET):	$(LINUX)
+	mkdir -p $(TARGET)
+	cp $(LINUX) $(TARGET)
+
+$(DL):
+	mkdir -p $@
+
+$(TMP):
+	mkdir -p $@
+
+$(LINUX): $(LINUX_DIR)
+	make -C $< mrproper
+	make -C $< ARCH=arm xilinx_zynq_defconfig
+	make -C $< ARCH=arm CFLAGS=$(LINUX_CFLAGS) -j $(shell grep -c ^processor /proc/cpuinfo) UIMAGE_LOADADDR=0x8000 uImage
+	cp $</arch/arm/boot/uImage $@
+
+$(LINUX_TAR): | $(DL)
+	curl -L $(LINUX_URL) -o $@
+
+$(LINUX_DIR): $(LINUX_TAR)
+	mkdir -p $@
+	tar -zxf $< --strip-components=1 --directory=$@
+	patch -d $@ -p 1 < patches/linux-xlnx-$(LINUX_TAG)-config.patch
+	patch -d $@ -p 1 < patches/linux-xlnx-$(LINUX_TAG)-eeprom.patch
+	patch -d $@ -p 1 < patches/linux-xlnx-$(LINUX_TAG)-wifi.patch
+	cp -r patches/rtl8192cu $@/drivers/net/wireless/

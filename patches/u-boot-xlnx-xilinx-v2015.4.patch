@@ -1,0 +1,62 @@
+diff -urN u-boot-xlnx-xilinx-v2015.4.orig/arch/arm/dts/zynq-zybo.dts u-boot-xlnx-xilinx-v2015.4/arch/arm/dts/zynq-zybo.dts
+--- u-boot-xlnx-xilinx-v2015.4.orig/arch/arm/dts/zynq-zybo.dts	2016-05-01 04:39:37.406149089 +0900
++++ u-boot-xlnx-xilinx-v2015.4/arch/arm/dts/zynq-zybo.dts	2016-05-01 04:40:16.971234481 +0900
+@@ -20,7 +20,7 @@
+ 
+ 	memory {
+ 		device_type = "memory";
+-		reg = <0x0 0x20000000>;
++		reg = <0x0 0x1E000000>;
+ 	};
+ 
+ 	chosen {
+diff -urN u-boot-xlnx-xilinx-v2015.4.orig/common/main.c u-boot-xlnx-xilinx-v2015.4/common/main.c
+--- u-boot-xlnx-xilinx-v2015.4.orig/common/main.c	2016-05-01 04:39:37.526152492 +0900
++++ u-boot-xlnx-xilinx-v2015.4/common/main.c	2016-05-01 04:43:43.007895568 +0900
+@@ -56,6 +56,8 @@
+ void main_loop(void)
+ {
+ 	const char *s;
++	u8 mac[6];
++	char mstr[20];
+ 
+ 	bootstage_mark_name(BOOTSTAGE_ID_MAIN_LOOP, "main_loop");
+ 
+@@ -82,6 +84,15 @@
+ 	if (cli_process_fdt(&s))
+ 		cli_secure_boot_cmd(s);
+ 
++	setenv("sdboot", "echo Running script from SD... && mmcinfo && fatload mmc 0 0x2000000 u-boot.scr && source 0x2000000");
++	eeprom_init();
++	if (eeprom_read(0x50, 250, mac, 6))
++		printf("eeprom read failed\n");
++
++	sprintf(mstr, "%0X:%0X:%0X:%0X:%0X:%0X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
++	printf("ethaddr set to: %s\n", mstr);
++	setenv("ethaddr", mstr);
++
+ 	autoboot_command(s);
+ 
+ 	cli_loop();
+diff -urN u-boot-xlnx-xilinx-v2015.4.orig/include/configs/zynq_zybo.h u-boot-xlnx-xilinx-v2015.4/include/configs/zynq_zybo.h
+--- u-boot-xlnx-xilinx-v2015.4.orig/include/configs/zynq_zybo.h	2016-05-01 04:39:37.602154645 +0900
++++ u-boot-xlnx-xilinx-v2015.4/include/configs/zynq_zybo.h	2016-05-01 04:40:16.975234587 +0900
+@@ -11,7 +11,7 @@
+ #ifndef __CONFIG_ZYNQ_ZYBO_H
+ #define __CONFIG_ZYNQ_ZYBO_H
+ 
+-#define CONFIG_SYS_SDRAM_SIZE (512 * 1024 * 1024)
++#define CONFIG_SYS_SDRAM_SIZE (480 * 1024 * 1024)
+ 
+ #define CONFIG_ZYNQ_SERIAL_UART1
+ #define CONFIG_ZYNQ_GEM0
+@@ -20,6 +20,9 @@
+ #define CONFIG_SYS_NO_FLASH
+ 
+ #define CONFIG_ZYNQ_SDHCI0
++#define CONFIG_ZYNQ_USB
++#define CONFIG_ZYNQ_I2C0
++#define CONFIG_ZYNQ_EEPROM
+ #define CONFIG_ZYNQ_BOOT_FREEBSD
+ 
+ /* Define ZYBO PS Clock Frequency to 50MHz */

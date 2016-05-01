@@ -1,0 +1,19 @@
+diff -urN linux-xlnx-xilinx-v2015.4.01.orig/drivers/net/wireless/Kconfig linux-xlnx-xilinx-v2015.4.01/drivers/net/wireless/Kconfig
+--- linux-xlnx-xilinx-v2015.4.01.orig/drivers/net/wireless/Kconfig	2016-04-30 10:31:58.302919701 +0900
++++ linux-xlnx-xilinx-v2015.4.01/drivers/net/wireless/Kconfig	2016-04-30 10:57:50.620639841 +0900
+@@ -283,5 +283,6 @@
+ source "drivers/net/wireless/mwifiex/Kconfig"
+ source "drivers/net/wireless/cw1200/Kconfig"
+ source "drivers/net/wireless/rsi/Kconfig"
++source "drivers/net/wireless/rtl8192cu/Kconfig"
+ 
+ endif # WLAN
+diff -urN linux-xlnx-xilinx-v2015.4.01.orig/drivers/net/wireless/Makefile linux-xlnx-xilinx-v2015.4.01/drivers/net/wireless/Makefile
+--- linux-xlnx-xilinx-v2015.4.01.orig/drivers/net/wireless/Makefile	2016-04-30 10:31:58.302919701 +0900
++++ linux-xlnx-xilinx-v2015.4.01/drivers/net/wireless/Makefile	2016-04-30 10:58:53.486034029 +0900
+@@ -60,3 +60,5 @@
+ 
+ obj-$(CONFIG_CW1200)	+= cw1200/
+ obj-$(CONFIG_RSI_91X)	+= rsi/
++
++obj-$(CONFIG_RTL8192CU)	+= rtl8192cu/
