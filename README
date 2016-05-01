@@ -1,11 +1,15 @@
+* Build
+$ source settings.sh
 $ make image
 $ sudo dd if=img/ubuntu_armhf_16.04_zybo.img of=/dev/sdc bs=4M
 
+* Resize SD filesystem
 # echo -e "d\n2\nw" | fdisk /dev/mmcblk0
 # parted -s /dev/mmcblk0 mkpart primary ext4 128MB 100%
 # reboot
 # resize2fs /dev/mmcblk0p2
 
+* Wireless
 $ sudo vi /etc/udev/rules.d/10-network.rules
 SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="74:da:38:42:21:93", NAME="wlan0"
 $ sudo vi /etc/network/interfaces.d/wlan0
@@ -32,3 +36,6 @@ network={
         psk=4b4221e12cf9cd6baeee9befb0d207cedc0bba343956bcfe7c0e63d1d1204aa9
 }
 $ sudo reboot
+
+* Image
+https://dl.dropboxusercontent.com/u/5781617/ubuntu_armhf_16.04_zybo.img
