@@ -1,5 +1,5 @@
---- devicetree.dts.orig	2016-04-30 22:12:25.533102667 +0900
-+++ devicetree.dts	2016-05-01 12:19:37.230389033 +0900
+--- devicetree.dts.orig	2016-05-04 17:05:37.873555555 +0900
++++ devicetree.dts	2016-05-04 17:09:45.471402716 +0900
 @@ -22,7 +22,7 @@
  	};
  	memory {
@@ -9,7 +9,7 @@
  	};
  };
  &gem0 {
-@@ -66,3 +66,38 @@
+@@ -66,3 +66,39 @@
  	fclk-enable = <0xf>;
  	ps-clk-frequency = <50000000>;
  };
@@ -31,6 +31,7 @@
 +		/* Microchip 24AA02E48 */
 +		compatible = "microchip,24c02";
 +		reg = <0x50>;
++		pagesize = <8>;
 +	};
 +};
 +&clkc {
