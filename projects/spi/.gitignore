@@ -1,0 +1,16 @@
+*.sw[op]
+vivado.log
+vivado.jou
+*~
+*#
+spi/
+.Xil/
+.srcs/
+usage_statistics_webtalk.html
+usage_statistics_webtalk.xml
+**/.git
+**/.metadata
+**/build
+boot.bin
+devicetree.dtb
+devicetree.dts
