@@ -1,7 +1,7 @@
 mkdir -p dl
 
-UBUNTU_URL=http://cdimage.ubuntu.com/ubuntu-core/releases/16.04/release
-UBUNTU=ubuntu-core-16.04-core-armhf.tar.gz
+UBUNTU_URL=http://cdimage.ubuntu.com/ubuntu-base/releases/16.04/release
+UBUNTU=ubuntu-base-16.04-core-armhf.tar.gz
 if [ ! -f dl/$UBUNTU ]; then
 curl -L $UBUNTU_URL/$UBUNTU -o dl/$UBUNTU
 fi
