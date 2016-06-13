@@ -1,6 +1,5 @@
-diff -urN linux-xlnx-xilinx-v2015.4.01.orig/arch/arm/configs/xilinx_zynq_defconfig linux-xlnx-xilinx-v2015.4.01/arch/arm/configs/xilinx_zynq_defconfig
---- linux-xlnx-xilinx-v2015.4.01.orig/arch/arm/configs/xilinx_zynq_defconfig	2016-04-30 10:31:44.931134420 +0900
-+++ linux-xlnx-xilinx-v2015.4.01/arch/arm/configs/xilinx_zynq_defconfig	2016-04-30 19:09:31.172787469 +0900
+--- linux-xlnx-xilinx-v2015.4.01/arch/arm/configs/xilinx_zynq_defconfig	2015-12-04 17:15:24.000000000 +0900
++++ linux-xlnx-xilinx-v2015.4.01.new/arch/arm/configs/xilinx_zynq_defconfig	2016-06-13 13:41:04.485146404 +0900
 @@ -112,8 +112,9 @@
  CONFIG_XILINX_EMACLITE=y
  CONFIG_XILINX_AXI_EMAC=y
@@ -13,7 +12,7 @@ diff -urN linux-xlnx-xilinx-v2015.4.01.orig/arch/arm/configs/xilinx_zynq_defconf
  CONFIG_MDIO_BITBANG=y
  CONFIG_INPUT_SPARSEKMAP=y
  CONFIG_INPUT_EVDEV=y
-@@ -247,3 +248,42 @@
+@@ -247,3 +248,43 @@
  CONFIG_FONTS=y
  CONFIG_FONT_8x8=y
  CONFIG_FONT_8x16=y
@@ -56,3 +55,4 @@ diff -urN linux-xlnx-xilinx-v2015.4.01.orig/arch/arm/configs/xilinx_zynq_defconf
 +CONFIG_USB_ACM=y
 +CONFIG_OF_OVERLAY=y
 +CONFIG_SPI_SPIDEV=y
++CONFIG_GPIO_XILINX=y

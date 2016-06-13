@@ -22,7 +22,7 @@ apply_bd_automation -rule xilinx.com:bd_rule:processing_system7 -config {
 create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 rst_0
 
 create_bd_cell -type ip -vlnv xilinx.com:ip:axi_quad_spi:3.2 spi_0
-set_property -dict [list CONFIG.C_USE_STARTUP {0} CONFIG.C_USE_STARTUP_INT {0} CONFIG.Multiples16 {1}  CONFIG.C_NUM_SS_BITS {2}] [get_bd_cells spi_0]
+set_property -dict [list CONFIG.C_USE_STARTUP {0} CONFIG.C_USE_STARTUP_INT {0} CONFIG.Multiples16 {128}  CONFIG.C_NUM_SS_BITS {2}] [get_bd_cells spi_0]
 
 connect_bd_net [get_bd_pins ps_0/IRQ_F2P] [get_bd_pins spi_0/ip2intc_irpt]
 connect_bd_intf_net [get_bd_intf_pins ps_0/IIC_0] [get_bd_intf_ports IIC_0]

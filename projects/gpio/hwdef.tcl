@@ -1,6 +1,6 @@
 # vivado -nolog -nojournal -mode batch -source hwdef.tcl
 
-set project_name spi
+set project_name gpio
 
 open_project $project_name/$project_name.xpr
 

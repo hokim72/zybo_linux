@@ -1,6 +1,6 @@
 # hsi -nolog -nojournal -mode batch -source fsbl.tcl
 
-set project_name spi
+set project_name gpio
 
 set hard_path $project_name/$project_name.hard
 set fsbl_path $project_name/$project_name.fsbl
