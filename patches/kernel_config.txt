@@ -1,0 +1,21 @@
+$ make ARCH=arm menuconfig
+
+Device Drivers -> Device Tree and Open Firmware support
+[*] Device Tree overlays  ===> CONFIG_OF_OVERLAY=y
+
+Device Drivers -> Network device support -> PHY Device support and infrastructure
+<*> Drivers for Realtek PHYs ===> CONFIG_REALTEK_PHY=y
+
+Device Drivers -> SPI support
+<*> User mode SPI device driver support ===> CONFIG_SPI_SPIDEV=y
+
+Device Drivers -> GPIO support
+<*> Xilinx GPIO support ===> CONFIG_GPIO_XILINX=y
+
+Networking support -> Wireless
+<*> cfg80211 - wireless configuration API ===> CONFIG_CFG80211=y
+<*> Generic IEEE 802.11 Networking Stack (mac80211) ===> CONFIG_MAC80211=y
+
+Device Drivers -> Network device support -> Wireless LAN
+<> Realtek rtlwifi family of devices ===> CONFIG_RTL_CARDS=n
+<*> Realtek 8192C USB WiFi ===> CONFIG_RTL8192CU=y
