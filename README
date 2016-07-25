@@ -33,7 +33,9 @@ network={
 network={
         ssid="NOTICE2.4"
         #psk="noticekorea21"
-        psk=4b4221e12cf9cd6baeee9befb0d207cedc0bba343956bcfe7c0e63d1d1204aa9
+		#psk=4b4221e12cf9cd6baeee9befb0d207cedc0bba343956bcfe7c0e63d1d1204aa9
+		key_mgmt=WPA-PSK
+		psk="noticekorea21"
 }
 $ sudo reboot
 

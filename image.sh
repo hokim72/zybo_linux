@@ -41,9 +41,11 @@ EOF_CAT
 cp /etc/resolv.conf         $ROOT_DIR/etc/
 cp /usr/bin/qemu-arm-static $ROOT_DIR/usr/bin/
 chroot $ROOT_DIR << EOF_CHROOT
+sed -i 's/^# deb http:\/\/ports\.ubuntu\.com\/ubuntu-ports\/ xenial universe.*/deb http:\/\/ports\.ubuntu\.com\/ubuntu-ports\/ xenial universe/' /etc/apt/sources.list
+sed -i 's/^# deb http:\/\/ports\.ubuntu\.com\/ubuntu-ports\/ xenial-updates universe.*/deb http:\/\/ports\.ubuntu\.com\/ubuntu-ports\/ xenial-updates universe/' /etc/apt/sources.list
 apt-get update
 apt-get -y upgrade
-apt-get -y install vim sudo openssh-server udev usbutils u-boot-tools net-tools wpasupplicant parted rfkill lshw wireless-tools gcc g++ cmake git
+apt-get -y install vim sudo openssh-server udev usbutils u-boot-tools net-tools wpasupplicant parted rfkill lshw wireless-tools gcc g++ cmake git i2c-tools
 echo "Asia/Seoul" > /etc/timezone
 #dpkg-reconfigure --frontend=noninteractive tzdata
 ln -fs /usr/share/zoneinfo/Asia/Seoul /etc/localtime
